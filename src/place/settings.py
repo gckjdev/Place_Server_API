@@ -11,12 +11,15 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'H:\\Users\\James\\Devel\\workspaces\\python\\research\\place-api\\src\\sqlite.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django_cassandra.db',
+        'NAME': 'PlaceKS',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '9160',
+        'SUPPORTS_TRANSACTIONS': False,
+        'CASSANDRA_REPLICATION_FACTOR': 1,
+        'CASSANDRA_REPLICATION_STRATEGY': 'org.apache.cassandra.locator.SimpleStrategy'
     }
 }
 
@@ -115,10 +118,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'orange.django.place',
     'place.api',
 )
 
