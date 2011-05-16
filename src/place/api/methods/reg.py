@@ -6,7 +6,9 @@ Created on 2011-5-16
 from django import forms
 from django.http import HttpResponse
 from orange.django.place import services
+from orange.django.place.exceptions import UserExistError
 from orange.django.place.models import User
+from orange.django.place.utils import get_json_response
 from place.api.utils import Constants
 
 def reg(request):
@@ -23,11 +25,16 @@ def reg(request):
         user.country_code = regForm.cleaned_data[Constants.PARA_COUNTRYCODE]
         user.language = regForm.cleaned_data[Constants.PARA_LANGUAGE]
         
-        return_code = services.register_user(user)
-        if return_code:
-            return HttpResponse("error, code=" + return_code)
+        returnCode = Constants.RET_SUCCESS
+        try:
+            services.register_user(user)
+        except UserExistError as e:
+            returnCode = e.code 
 
-        return HttpResponse("ok")
+        if returnCode == Constants.RET_SUCCESS:
+            return get_json_response({Constants.RET_CODE: returnCode, Constants.RET_DATA: {'userId': user.id}})
+        else:
+            return get_json_response({Constants.RET_CODE: returnCode})
     else:
         print regForm.errors
         return HttpResponse("error")

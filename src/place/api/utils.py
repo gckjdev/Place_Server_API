@@ -4,8 +4,6 @@ Created on 2011-5-16
 = author: James
 '''
 
-
-
 class Constants(object):
     METHOD = "m"
     METHOD_TEST = "test"
@@ -60,5 +58,5 @@ class Constants(object):
     RET_MESSAGE = "msg"
     RET_CODE = "ret"
     RET_DATA = "dat"
-
+    RET_SUCCESS = 0
 
