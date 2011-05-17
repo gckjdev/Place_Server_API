@@ -12,18 +12,18 @@ from place.api import errors
 from place.api.utils import Constants
 
 def reg(request):
-    regForm = RegForm(request.GET);
-    if regForm.is_valid():
-        print regForm.changed_data
+    reg_form = RegForm(request.GET);
+    if reg_form.is_valid():
+        print reg_form.changed_data
         user = User()
-        user.login_id = regForm.cleaned_data[Constants.PARA_LOGINID]
-        user.login_id_type = regForm.cleaned_data[Constants.PARA_LOGINIDTYPE]
-        user.device_id = regForm.cleaned_data[Constants.PARA_DEVICEID]
-        user.device_model = regForm.cleaned_data[Constants.PARA_DEVICEMODEL]
-        user.device_os = regForm.cleaned_data[Constants.PARA_DEVICEOS]
-        user.device_token = regForm.cleaned_data[Constants.PARA_DEVICETOKEN]
-        user.country_code = regForm.cleaned_data[Constants.PARA_COUNTRYCODE]
-        user.language = regForm.cleaned_data[Constants.PARA_LANGUAGE]
+        user.login_id = reg_form.cleaned_data[Constants.PARA_LOGINID]
+        user.login_id_type = reg_form.cleaned_data[Constants.PARA_LOGINIDTYPE]
+        user.device_id = reg_form.cleaned_data[Constants.PARA_DEVICEID]
+        user.device_model = reg_form.cleaned_data[Constants.PARA_DEVICEMODEL]
+        user.device_os = reg_form.cleaned_data[Constants.PARA_DEVICEOS]
+        user.device_token = reg_form.cleaned_data[Constants.PARA_DEVICETOKEN]
+        user.country_code = reg_form.cleaned_data[Constants.PARA_COUNTRYCODE]
+        user.language = reg_form.cleaned_data[Constants.PARA_LANGUAGE]
 
         returnCode = Constants.RET_SUCCESS
         try:
@@ -37,7 +37,7 @@ def reg(request):
             return get_json_response(get_return_dict(returnCode))
     else:
         returnCode = errors.PARAM_ERROR
-        return get_json_response(get_return_dict(returnCode, message=regForm.errors))
+        return get_json_response(get_return_dict(returnCode, message=reg_form.errors))
 
 def get_return_dict(return_code, data=None, message=None):
     return_dict = {Constants.RET_CODE: return_code}
