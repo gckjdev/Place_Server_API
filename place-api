@@ -1,6 +1,6 @@
 WSGIPythonHome /usr/local/lib/py27-nosql
 
-WSGIScriptAlias /place/ "/var/python/django/place-api/django.wsgi"
+WSGIScriptAlias /place "/var/python/django/place-api/django.wsgi"
 
 <Directory "/var/python/django/place-api">
 Allow from all
