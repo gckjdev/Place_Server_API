@@ -32,6 +32,7 @@ class Constants(object):
     
     PARA_RADIUS = "ra"
     PARA_POSTTYPE = "pt"
+    PARA_POSTID = "pi"
     PARA_NAME = "na"
     PARA_DESC = "de"
     
@@ -60,3 +61,4 @@ class Constants(object):
     RET_DATA = "dat"
     RET_SUCCESS = 0
 
+    PARA_CREATE_DATE = 'cd'
