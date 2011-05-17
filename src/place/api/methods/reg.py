@@ -4,11 +4,11 @@ Created on 2011-5-16
 @author: James
 '''
 from django import forms
-from django.http import HttpResponse
 from orange.django.place import services
 from orange.django.place.exceptions import UserExistError
 from orange.django.place.models import User
 from orange.django.place.utils import get_json_response
+from place.api import errors
 from place.api.utils import Constants
 
 def reg(request):
@@ -24,7 +24,7 @@ def reg(request):
         user.device_token = regForm.cleaned_data[Constants.PARA_DEVICETOKEN]
         user.country_code = regForm.cleaned_data[Constants.PARA_COUNTRYCODE]
         user.language = regForm.cleaned_data[Constants.PARA_LANGUAGE]
-        
+
         returnCode = Constants.RET_SUCCESS
         try:
             services.register_user(user)
@@ -32,19 +32,27 @@ def reg(request):
             returnCode = e.code 
 
         if returnCode == Constants.RET_SUCCESS:
-            return get_json_response({Constants.RET_CODE: returnCode, Constants.RET_DATA: {'userId': user.id}})
+            return get_json_response(get_return_dict(returnCode, {Constants.PARA_USERID: user.id}))
         else:
-            return get_json_response({Constants.RET_CODE: returnCode})
+            return get_json_response(get_return_dict(returnCode))
     else:
-        print regForm.errors
-        return HttpResponse("error")
+        returnCode = errors.PARAM_ERROR
+        return get_json_response(get_return_dict(returnCode, message=regForm.errors))
+
+def get_return_dict(return_code, data=None, message=None):
+    return_dict = {Constants.RET_CODE: return_code}
+    if data:
+        return_dict[Constants.RET_DATA] = data
+    if message:
+        return_dict[Constants.RET_MESSAGE] = message
+    return return_dict
 
 class RegForm(forms.Form):
     lid = forms.CharField(max_length=50)
     lty = forms.IntegerField()
     did = forms.CharField(max_length=150)
     dos = forms.IntegerField()
-    cc = forms.CharField(max_length=20)
-    lang = forms.CharField(max_length=20)
     dm = forms.CharField(max_length=50)
-    dto = forms.CharField(max_length=150)
+    cc = forms.CharField(max_length=20, required=False)
+    lang = forms.CharField(max_length=20, required=False)
+    dto = forms.CharField(max_length=150, required=False)

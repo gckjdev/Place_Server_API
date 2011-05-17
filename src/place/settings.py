@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'PlaceKS',
         'USER': '',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '192.168.1.101',
         'PORT': '9160',
         'SUPPORTS_TRANSACTIONS': False,
         'CASSANDRA_REPLICATION_FACTOR': 1,
