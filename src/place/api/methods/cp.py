@@ -9,7 +9,7 @@ from orange.django.place.models import Post
 from orange.django.place.utils import get_json_response
 from place.api import errors
 from place.api.methods.reg import get_return_dict
-from place.api.utils import Constants
+from place.api.utils import Constants, get_return_date_string
 
 def cp(request):
     cp_form = CpForm(request.GET)
@@ -28,7 +28,7 @@ def cp(request):
         services.new_post(post);
 
         returnCode = Constants.RET_SUCCESS
-        return get_json_response(get_return_dict(returnCode, {Constants.PARA_PLACEID: post.id, Constants.PARA_CREATE_DATE: post.create_time}))
+        return get_json_response(get_return_dict(returnCode, {Constants.PARA_PLACEID: post.id, Constants.PARA_CREATE_DATE: get_return_date_string(post.create_time)}))
     else:
         returnCode = errors.PARAM_ERROR
         return get_json_response(get_return_dict(returnCode, message=cp_form.errors))

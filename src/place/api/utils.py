@@ -3,6 +3,15 @@ Created on 2011-5-16
 
 = author: James
 '''
+import datetime
+
+def get_return_date_string(datetime):
+    datestring = datetime.strftime('%Y%m%d%H%M%S')
+    
+    return datestring;
+
+if __name__=='__main__':
+    print get_return_date_string(datetime.datetime.utcnow())
 
 class Constants(object):
     METHOD = "m"
