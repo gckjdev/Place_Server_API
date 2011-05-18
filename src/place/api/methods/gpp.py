@@ -7,8 +7,7 @@ from django import forms
 from orange.django.place import services
 from orange.django.place.utils import get_json_response
 from place.api import errors
-from place.api.utils import ParamConsts, ReturnConsts, get_return_dict, \
-    str2stddate
+from place.api.utils import ParamConsts, ReturnConsts, get_return_dict, date2str
 
 def gpp(request):
     gpp_form = GppForm(request.GET)
@@ -26,17 +25,17 @@ def gpp(request):
 
 def __get_return_list(posts):
     result = []
-    for post in posts.values():
+    for post in posts:
         post_dict = {}
-        post_dict[ParamConsts.POSTID] = post['id']
-        post_dict[ParamConsts.USERID] = post['user_id']
-        post_dict[ParamConsts.LATITUDE] = post['latitude']
-        post_dict[ParamConsts.LONGTITUDE] = post['longitude']
-        post_dict[ParamConsts.USER_LATITUDE] = post['user_latitude']
-        post_dict[ParamConsts.USER_LONGITUDE] = post['user_longitude']
-        post_dict[ParamConsts.TEXT_CONTENT] = post['text_content']
-        post_dict[ParamConsts.CONTENT_TYPE] = post['content_type']
-        post_dict[ParamConsts.CREATE_DATE] = str2stddate(post['create_time'])
+        post_dict[ParamConsts.POSTID] = post.id
+        post_dict[ParamConsts.USERID] = post.user_id
+        post_dict[ParamConsts.LATITUDE] = post.latitude
+        post_dict[ParamConsts.LONGTITUDE] = post.longitude
+        post_dict[ParamConsts.USER_LATITUDE] = post.user_latitude
+        post_dict[ParamConsts.USER_LONGITUDE] = post.user_longitude
+        post_dict[ParamConsts.TEXT_CONTENT] = post.text_content
+        post_dict[ParamConsts.CONTENT_TYPE] = post.content_type
+        post_dict[ParamConsts.CREATE_DATE] = date2str(post.create_time)
         result.append(post_dict)
     return result
 

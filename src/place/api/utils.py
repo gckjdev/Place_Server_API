@@ -7,7 +7,6 @@ import datetime
 
 def date2str(datetime):
     datestring = datetime.strftime('%Y%m%d%H%M%S')
-    
     return datestring;
 
 def str2stddate(isostr):
