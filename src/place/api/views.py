@@ -2,14 +2,14 @@ from django import forms
 from orange.django.place.utils import get_json_response
 from place.api import errors
 from place.api.methods.reg import get_return_dict
-from place.api.utils import Constants
+from place.api import MethodConsts
 import place.api.methods
 
 def internal_method(request):
     if request.method == 'GET':
         in_form = InternalForm(request.GET)
         if in_form.is_valid():
-            method = getattr(place.api.methods, in_form.cleaned_data[Constants.METHOD])
+            method = getattr(place.api.methods, in_form.cleaned_data[MethodConsts.METHOD])
             return method(request)
         else:
             returnCode = errors.PARAM_ERROR

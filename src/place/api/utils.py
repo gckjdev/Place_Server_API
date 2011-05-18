@@ -5,69 +5,89 @@ Created on 2011-5-16
 '''
 import datetime
 
-def get_return_date_string(datetime):
+def date2str(datetime):
     datestring = datetime.strftime('%Y%m%d%H%M%S')
     
     return datestring;
 
-if __name__=='__main__':
-    print get_return_date_string(datetime.datetime.utcnow())
+def str2stddate(isostr):
+    return date2str(datetime.datetime.strptime(isostr, '%Y-%m-%d %H:%M:%S.%f'))
 
-class Constants(object):
+def get_return_dict(return_code, data=None, message=None):
+    return_dict = {ReturnConsts.CODE: return_code}
+    if data:
+        return_dict[ReturnConsts.DATA] = data
+    if message:
+        return_dict[ReturnConsts.MESSAGE] = message
+    return return_dict
+
+class MethodConsts():
     METHOD = "m"
-    METHOD_TEST = "test"
-    METHOD_ONLINESTATUS = "srpt"
-    METHOD_REGISTRATION = "reg"
-    METHOD_CREATEPOST = "cp"
-    METHOD_CREATEPLACE = "cpl"
-    
-    # request parameters
-    
-    PARA_USERID = "uid"
-    PARA_LOGINID = "lid"
-    PARA_LOGINIDTYPE = "lty"
-    PARA_USERTYPE = "uty"
-    PARA_PASSWORD = "pwd"
-    
-    PARA_DEVICEID = "did"
-    PARA_DEVICETYPE = "dty"
-    PARA_DEVICEMODEL = "dm"
-    PARA_DEVICEOS = "dos"
-    PARA_DEVICETOKEN = "dto"
-    
-    PARA_COUNTRYCODE = "cc"
-    PARA_LANGUAGE = "lang"
-    PARA_APPID = "app"
-    
-    PARA_RADIUS = "ra"
-    PARA_POSTTYPE = "pt"
-    PARA_POSTID = "pi"
-    PARA_NAME = "na"
-    PARA_DESC = "de"
-    
-    PARA_CONTENT_TYPE = "ct"
-    PARA_TEXT_CONTENT = "t"
-    PARA_USER_LATITUDE = "ula"
-    PARA_USER_LONGITUDE = "ulo"
-    PARA_SYNC_SNS = "ss"
-    PARA_PLACEID = "pid" 
-    
-    PARA_STATUS = "s"
-    
-    PARA_TIMESTAMP = "ts"
-    PARA_MAC = "mac"
-    
-    PARA_DATA = "dat"
-    
-    PARA_LONGTITUDE = "lo"
-    PARA_LATITUDE = "lat"
-    PARA_MESSAGETEXT = "t"
-    
-    # response parameters
-    
-    RET_MESSAGE = "msg"
-    RET_CODE = "ret"
-    RET_DATA = "dat"
-    RET_SUCCESS = 0
+    TEST = "test"
+    ONLINESTATUS = "srpt"
+    REGISTRATION = "reg"
+    CREATEPOST = "cp"
+    CREATEPLACE = "cpl"
+    GETUSERPLACES = "gup"
+    GETPLACEPOST = "gpp"
 
-    PARA_CREATE_DATE = 'cd'
+class ParamConsts():
+    USERID = "uid"
+    LOGINID = "lid"
+    LOGINIDTYPE = "lty"
+    USERTYPE = "uty"
+    PASSWORD = "pwd"
+    
+    DEVICEID = "did"
+    DEVICETYPE = "dty"
+    DEVICEMODEL = "dm"
+    DEVICEOS = "dos"
+    DEVICETOKEN = "dto"
+    NICKNAME = "nn"
+    
+    COUNTRYCODE = "cc"
+    LANGUAGE = "lang"
+    APPID = "app"
+    
+    RADIUS = "ra"
+    POSTTYPE = "pt"
+    NAME = "na"
+    DESC = "de"
+    AFTER_TIMESTAMP = "at"
+    MAX_COUNT = "mc"
+    
+    TOTAL_VIEW = "tv"
+    TOTAL_FORWARD = "tf"
+    TOTAL_QUOTE = "tq"
+    TOTAL_REPLY = "tr"
+    CREATE_DATE = "cd"
+    
+    POSTID = "pi"
+    IMAGE_URL = "iu"
+    CONTENT_TYPE = "ct"
+    TEXT_CONTENT = "t"
+    USER_LATITUDE = "ula"
+    USER_LONGITUDE = "ulo"
+    SYNC_SNS = "ss"
+    PLACEID = "pid" 
+    
+    CREATE_USERID = "cuid"
+    
+    STATUS = "s"
+    
+    TIMESTAMP = "ts"
+    MAC = "mac"
+    
+    DATA = "dat"
+    
+    LONGTITUDE = "lo"
+    LATITUDE = "lat"
+    MESSAGETEXT = "t"
+    
+    VERSION = "v"
+
+class ReturnConsts():
+    MESSAGE = "msg"
+    CODE = "ret"
+    DATA = "dat"
+    SUCCESS = 0
