@@ -41,5 +41,5 @@ def __get_return_list(posts):
 
 class GppForm(forms.Form):
     pid = forms.CharField(max_length=100)
-    at = forms.CharField(max_length=100)
+    at = forms.CharField(max_length=100, required=False)
     mc = forms.IntegerField()

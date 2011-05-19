@@ -9,7 +9,7 @@ from orange.django.place.models import Post
 from orange.django.place.utils import get_json_response
 from place.api import errors
 from place.api.utils import date2str, ParamConsts, ReturnConsts, get_return_dict
-
+ 
 def cp(request):
     cp_form = CpForm(request.GET)
     if cp_form.is_valid():
