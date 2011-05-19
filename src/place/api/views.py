@@ -1,7 +1,7 @@
 from django import forms
 from orange.django.place.utils import get_json_response
 from place.api import MethodConsts, errors
-from place.api.methods.reg import get_return_dict
+from place.api.utils import get_return_dict
 import logging
 import place.api.methods
 
