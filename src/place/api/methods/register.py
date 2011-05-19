@@ -14,7 +14,6 @@ from place.api.utils import ParamConsts, get_return_dict
 def reg(request):
     reg_form = RegForm(request.GET);
     if reg_form.is_valid():
-        print reg_form.changed_data
         user = User()
         user.login_id = reg_form.cleaned_data[ParamConsts.LOGINID]
         user.login_id_type = reg_form.cleaned_data[ParamConsts.LOGINIDTYPE]
