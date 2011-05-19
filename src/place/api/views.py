@@ -1,6 +1,8 @@
+
 from django import forms
 from orange.django.place.utils import get_json_response
-from place.api import MethodConsts, errors
+from orange.place import errors
+from place.api import MethodConsts
 from place.api.utils import get_return_dict
 import logging
 import place.api.methods
@@ -15,7 +17,7 @@ def internal_method(request):
             method = getattr(place.api.methods, in_form.cleaned_data[MethodConsts.METHOD])
             return method(request)
         else:
-            returnCode = errors.PARAM_ERROR
+            returnCode = errors.ERROR_PARAMETER
             return get_json_response(get_return_dict(returnCode, message=in_form.errors))
     logger.warn('internal method should not be posted')
 

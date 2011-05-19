@@ -6,7 +6,9 @@ Created on 2011-5-18
 from django import forms
 from orange.django.place import services
 from orange.django.place.utils import get_json_response
-from place.api import ParamConsts, ReturnConsts, errors
+
+from orange.place import errors
+from place.api import ParamConsts
 from place.api.utils import get_return_dict, date2str
 
 def gpp(request):
@@ -17,10 +19,10 @@ def gpp(request):
         max_count = gpp_form.cleaned_data[ParamConsts.MAX_COUNT]
         posts = services.get_place_posts(place_id, before, max_count)
 
-        returnCode = ReturnConsts.SUCCESS
+        returnCode = errors.ERROR_SUCCESS
         return get_json_response(get_return_dict(returnCode, __get_return_list(posts)))
     else:
-        returnCode = errors.PARAM_ERROR
+        returnCode = errors.ERROR_PARAMETER
         return get_json_response(get_return_dict(returnCode, message=gpp_form.errors))
 
 def __get_return_list(posts):

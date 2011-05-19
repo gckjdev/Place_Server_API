@@ -7,7 +7,9 @@ from django import forms
 from orange.django.place import services
 from orange.django.place.models import Place
 from orange.django.place.utils import get_json_response
-from place.api import errors, ParamConsts, ReturnConsts
+
+from orange.place import errors
+from place.api import ParamConsts
 from place.api.utils import get_return_dict
 
 def cpl(request):
@@ -23,11 +25,11 @@ def cpl(request):
         place.post_type = cpl_form.cleaned_data[ParamConsts.POSTTYPE]
 
         services.new_place(place);
-
-        returnCode = ReturnConsts.SUCCESS
+ 
+        returnCode = errors.ERROR_SUCCESS
         return get_json_response(get_return_dict(returnCode, {ParamConsts.PLACEID: place.id}))
     else:
-        returnCode = errors.PARAM_ERROR
+        returnCode = errors.ERROR_PARAMETER
         return get_json_response(get_return_dict(returnCode, message=cpl_form.errors))
 
 class CplForm(forms.Form):
