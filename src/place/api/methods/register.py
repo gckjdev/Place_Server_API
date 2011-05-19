@@ -9,7 +9,8 @@ from orange.django.place import services
 from orange.django.place.models import User
 from orange.django.place.utils import get_json_response
 from orange.place import errors 
-from place.api.utils import ParamConsts, get_return_dict
+from place.api import ParamConsts
+from place.api.utils import get_return_dict
 
 def reg(request):
     reg_form = RegForm(request.GET);

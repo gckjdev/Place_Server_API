@@ -6,8 +6,10 @@ Created on 2011-5-18
 from django import forms
 from orange.django.place import services
 from orange.django.place.utils import get_json_response
+
 from orange.place import errors
-from place.api.utils import ParamConsts, get_return_dict, date2str
+from place.api import ParamConsts
+from place.api.utils import get_return_dict, date2str
 
 def gpp(request):
     gpp_form = GppForm(request.GET)
