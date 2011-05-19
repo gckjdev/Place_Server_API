@@ -37,7 +37,7 @@ def __get_return_list(posts):
         post_dict[ParamConsts.USER_LONGITUDE] = post.user_longitude
         post_dict[ParamConsts.TEXT_CONTENT] = post.text_content
         post_dict[ParamConsts.CONTENT_TYPE] = post.content_type
-        post_dict[ParamConsts.CREATE_DATE] = date2str(post.create_time)
+        post_dict[ParamConsts.CREATE_DATE] = date2str(post.create_date)
         result.append(post_dict)
     return result
 
