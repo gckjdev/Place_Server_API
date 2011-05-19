@@ -20,6 +20,8 @@ def get_return_dict(return_code, data=None, message=None):
         return_dict[ReturnConsts.MESSAGE] = message
     return return_dict
 
+
+
 class MethodConsts():
     METHOD = "m"
     TEST = "test"

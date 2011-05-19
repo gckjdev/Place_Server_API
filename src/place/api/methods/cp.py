@@ -7,8 +7,8 @@ from django import forms
 from orange.django.place import services
 from orange.django.place.models import Post
 from orange.django.place.utils import get_json_response
-from place.api import errors
-from place.api.utils import date2str, ParamConsts, ReturnConsts, get_return_dict
+from orange.place import errors
+from place.api.utils import date2str, ParamConsts, get_return_dict
  
 def cp(request):
     cp_form = CpForm(request.GET)
@@ -26,10 +26,10 @@ def cp(request):
 
         services.new_post(post);
 
-        returnCode = ReturnConsts.SUCCESS
+        returnCode = errors.ERROR_SUCCESS
         return get_json_response(get_return_dict(returnCode, {ParamConsts.POSTID: post.id, ParamConsts.CREATE_DATE: date2str(post.create_time)}))
     else:
-        returnCode = errors.PARAM_ERROR
+        returnCode = errors.ERROR_PARAMETER
         return get_json_response(get_return_dict(returnCode, message=cp_form.errors))
 
 class CpForm(forms.Form):
