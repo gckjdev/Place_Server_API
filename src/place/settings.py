@@ -134,7 +134,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(asctime)s [%(process)d]:[%(thread)d] %(name)s %(levelname)s %(message)s'
+            'format': '%(asctime)s [%(process)d]:[%(thread)d] %(levelname)s %(name)s %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
