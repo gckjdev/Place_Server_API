@@ -12,20 +12,20 @@ logger = logging.getLogger(__name__)
 def internal_method(request):
     if request.method == 'GET':
         in_form = InternalForm(request.GET)
-        logger.debug(in_form.data)
+        logger.info('[RECV] %s' % in_form.data)
         if in_form.is_valid():
             try:
                 method = getattr(place.api.methods, in_form.cleaned_data[MethodConsts.METHOD])
                 return method(request)
             except Exception:
-                returnCode = errors.INTERNAL_ERROR
+                returnCode = errors.ERROR_PARA_METHOD_NOT_FOUND
                 logger.exception('%s', traceback.extract_stack())
                 return get_json_response(get_return_dict(returnCode, message='unknown error'))
         else:
             returnCode = errors.ERROR_PARAMETER
             return get_json_response(get_return_dict(returnCode, message=in_form.errors))
-    else:
-        returnCode = errors.ERROR_PARAMETER
+    else: 
+        returnCode = errors.ERROR_NOT_GET_METHOD
         return get_json_response(get_return_dict(returnCode, message='not GET method'))
 
 class InternalForm(forms.Form):

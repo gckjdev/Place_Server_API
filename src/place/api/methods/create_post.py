@@ -11,6 +11,9 @@ from orange.django.place.utils import get_json_response
 from orange.place import errors
 from place.api import ParamConsts
 from place.api.utils import date2str, get_return_dict
+import logging
+
+logger = logging.getLogger(__name__)
 
 def cp(request):
     cp_form = CpForm(request.GET)

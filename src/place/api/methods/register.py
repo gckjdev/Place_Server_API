@@ -11,6 +11,9 @@ from orange.django.place.utils import get_json_response
 from orange.place import errors 
 from place.api import ParamConsts
 from place.api.utils import get_return_dict
+import logging
+
+logger = logging.getLogger(__name__)
 
 def reg(request):
     reg_form = RegForm(request.GET);
@@ -40,14 +43,6 @@ def reg(request):
         return get_json_response(get_return_dict(returnCode, message=reg_form.errors))
 
 class RegForm(forms.Form):
-    #lid = forms.CharField(max_length=50)
-    #lty = forms.IntegerField()
-    #did = forms.CharField(max_length=150)
-    #dos = forms.IntegerField()
-    #dm = forms.CharField(max_length=50)
-    #cc = forms.CharField(max_length=20, required=False)
-    #lang = forms.CharField(max_length=20, required=False)
-    #dto = forms.CharField(max_length=150, required=False)
     
     fields = ParamConsts.LOGINID + '= forms.CharField(max_length=50)\n'    
     fields += ParamConsts.LOGINIDTYPE + '= forms.IntegerField()\n'

@@ -7,10 +7,12 @@ from django import forms
 from orange.django.place import services
 from orange.django.place.models import Place
 from orange.django.place.utils import get_json_response
-
 from orange.place import errors
 from place.api import ParamConsts
 from place.api.utils import get_return_dict
+import logging
+
+logger = logging.getLogger(__name__)
 
 def cpl(request):
     cpl_form = CplForm(request.GET)
@@ -34,10 +36,6 @@ def cpl(request):
 
 class CplForm(forms.Form):
     
-    #appId = ParamConsts.APPID + '= forms.CharField(max_length=100)'
-    #compile(appId, '', 'exec')
-    #exec(appId) 
-        
     fields = ParamConsts.USERID + '= forms.CharField(max_length=100)\n'    
     fields += ParamConsts.APPID + '= forms.CharField(max_length=100)\n'
     fields += ParamConsts.LONGTITUDE + '= forms.FloatField()\n'
@@ -48,34 +46,3 @@ class CplForm(forms.Form):
     code = compile(fields, '', 'exec')
     exec(code)
    
-    #str += '\n'+longitude
-    #compile(str, '', 'exec')
-    #exec(str)
-    
-    #latitude = ParamConsts.LATITUDE + '= forms.FloatField()'
-    #compile(latitude, '', 'exec')
-    #exec(latitude)
-    
-    #name = ParamConsts.NAME + '= forms.CharField(max_length=100)'
-    #compile(name, '', 'exec')
-    #exec(name)
-    
-    #radius = ParamConsts.RADIUS + '= forms.IntegerField()'
-    #compile(radius, '', 'exec')
-    #exec(radius)
-
-    #postType = ParamConsts.POSTTYPE + '= forms.IntegerField()'
-    #compile(postType, '', 'exec')
-    #exec(postType)
-    
-    #userId = ParamConsts.USERID + '= forms.CharField(max_length=100)'    
-    #compile(userId, '', 'exec')
-    #exec(userId)
-    
-    #uid = forms.CharField(max_length=100)
-    #app = forms.CharField(max_length=100)
-    #lo = forms.FloatField()
-    #lat = forms.FloatField()
-    #na = forms.CharField(max_length=100)
-    #ra = forms.IntegerField()
-    #pt = forms.IntegerField()

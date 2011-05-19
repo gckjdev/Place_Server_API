@@ -10,6 +10,9 @@ from orange.django.place.utils import get_json_response
 from orange.place import errors
 from place.api import ParamConsts
 from place.api.utils import get_return_dict, date2str
+import logging
+
+logger = logging.getLogger(__name__)
 
 def gpp(request):
     gpp_form = GppForm(request.GET)
@@ -51,6 +54,3 @@ class GppForm(forms.Form):
     code = compile(fields, '', 'exec')
     exec(code)
         
-    #pid = forms.CharField(max_length=100)
-    #at = forms.CharField(max_length=100, required=False)
-    #mc = forms.IntegerField()
