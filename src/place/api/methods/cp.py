@@ -9,7 +9,7 @@ from orange.django.place.models import Post
 from orange.django.place.utils import get_json_response
 from place.api import errors
 from place.api.utils import date2str, ParamConsts, ReturnConsts, get_return_dict
-
+ 
 def cp(request):
     cp_form = CpForm(request.GET)
     if cp_form.is_valid():
@@ -33,12 +33,16 @@ def cp(request):
         return get_json_response(get_return_dict(returnCode, message=cp_form.errors))
 
 class CpForm(forms.Form):
-    uid = forms.CharField(max_length=100)
-    app = forms.CharField(max_length=50)
-    pid = forms.CharField(max_length=100)
-    ct = forms.IntegerField()
-    t = forms.CharField(max_length=200)
-    lat = forms.FloatField()
-    lo = forms.FloatField()
-    ula = forms.FloatField()
-    ulo = forms.FloatField()
+
+    fields = ParamConsts.USERID + '= forms.CharField(max_length=100)\n'    
+    fields += ParamConsts.APPID + '= forms.CharField(max_length=50)\n'
+    fields += ParamConsts.PLACEID + '= forms.CharField(max_length=100)\n'
+    fields += ParamConsts.CONTENT_TYPE + '= forms.IntegerField()\n'
+    fields += ParamConsts.TEXT_CONTENT + '= forms.CharField(max_length=200)\n'
+    fields += ParamConsts.LATITUDE + '= forms.FloatField()\n'
+    fields += ParamConsts.LONGTITUDE + '= forms.FloatField()\n'
+    fields += ParamConsts.USER_LONGITUDE + '= forms.FloatField()\n'
+    fields += ParamConsts.USER_LATITUDE + '= forms.FloatField()\n'
+    code = compile(fields, '', 'exec')
+    exec(code)
+

@@ -40,6 +40,15 @@ def __get_return_list(posts):
     return result
 
 class GppForm(forms.Form):
-    pid = forms.CharField(max_length=100)
-    at = forms.CharField(max_length=100)
-    mc = forms.IntegerField()
+    
+    fields = ParamConsts.USERID + '= forms.CharField(max_length=100)\n'    
+    fields += ParamConsts.APPID + '= forms.CharField(max_length=50)\n'
+    fields += ParamConsts.PLACEID + '= forms.CharField(max_length=100)\n'
+    fields += ParamConsts.AFTER_TIMESTAMP + '= forms.CharField(max_length=100, required=False)\n'
+    fields += ParamConsts.MAX_COUNT + '= forms.IntegerField()\n'
+    code = compile(fields, '', 'exec')
+    exec(code)
+        
+    #pid = forms.CharField(max_length=100)
+    #at = forms.CharField(max_length=100, required=False)
+    #mc = forms.IntegerField()
