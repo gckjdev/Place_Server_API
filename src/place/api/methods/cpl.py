@@ -31,10 +31,49 @@ def cpl(request):
         return get_json_response(get_return_dict(returnCode, message=cpl_form.errors))
 
 class CplForm(forms.Form):
-    uid = forms.CharField(max_length=100)
-    app = forms.CharField(max_length=100)
-    lo = forms.FloatField()
-    lat = forms.FloatField()
-    na = forms.CharField(max_length=100)
-    ra = forms.IntegerField()
-    pt = forms.IntegerField()
+    
+    #appId = ParamConsts.APPID + '= forms.CharField(max_length=100)'
+    #compile(appId, '', 'exec')
+    #exec(appId) 
+        
+    fields = ParamConsts.USERID + '= forms.CharField(max_length=100)\n'    
+    fields += ParamConsts.APPID + '= forms.CharField(max_length=100)\n'
+    fields += ParamConsts.LONGTITUDE + '= forms.FloatField()\n'
+    fields += ParamConsts.LATITUDE + '= forms.FloatField()\n'
+    fields += ParamConsts.NAME + '= forms.CharField(max_length=100)\n'
+    fields += ParamConsts.RADIUS + '= forms.IntegerField()\n'
+    fields += ParamConsts.POSTTYPE + '= forms.IntegerField()\n'
+    code = compile(fields, '', 'exec')
+    exec(code)
+   
+    #str += '\n'+longitude
+    #compile(str, '', 'exec')
+    #exec(str)
+    
+    #latitude = ParamConsts.LATITUDE + '= forms.FloatField()'
+    #compile(latitude, '', 'exec')
+    #exec(latitude)
+    
+    #name = ParamConsts.NAME + '= forms.CharField(max_length=100)'
+    #compile(name, '', 'exec')
+    #exec(name)
+    
+    #radius = ParamConsts.RADIUS + '= forms.IntegerField()'
+    #compile(radius, '', 'exec')
+    #exec(radius)
+
+    #postType = ParamConsts.POSTTYPE + '= forms.IntegerField()'
+    #compile(postType, '', 'exec')
+    #exec(postType)
+    
+    #userId = ParamConsts.USERID + '= forms.CharField(max_length=100)'    
+    #compile(userId, '', 'exec')
+    #exec(userId)
+    
+    #uid = forms.CharField(max_length=100)
+    #app = forms.CharField(max_length=100)
+    #lo = forms.FloatField()
+    #lat = forms.FloatField()
+    #na = forms.CharField(max_length=100)
+    #ra = forms.IntegerField()
+    #pt = forms.IntegerField()
