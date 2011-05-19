@@ -29,7 +29,7 @@ def cp(request):
         services.new_post(post);
 
         returnCode = errors.ERROR_SUCCESS
-        return get_json_response(get_return_dict(returnCode, {ParamConsts.POSTID: post.id, ParamConsts.CREATE_DATE: date2str(post.create_time)}))
+        return get_json_response(get_return_dict(returnCode, {ParamConsts.POSTID: post.id, ParamConsts.CREATE_DATE: date2str(post.create_date)}))
     else:
         returnCode = errors.ERROR_PARAMETER
         return get_json_response(get_return_dict(returnCode, message=cp_form.errors))
