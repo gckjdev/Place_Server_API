@@ -108,8 +108,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.cache.CacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.cache.CacheMiddleware',
 )
 
 ROOT_URLCONF = 'place.urls'
