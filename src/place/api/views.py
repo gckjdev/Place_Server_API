@@ -7,6 +7,7 @@ import logging
 import place.api.methods
 import traceback
 
+
 logger = logging.getLogger(__name__)
 
 def internal_method(request):
@@ -29,4 +30,6 @@ def internal_method(request):
         return get_json_response(get_return_dict(returnCode, message='not GET method'))
 
 class InternalForm(forms.Form):
-    m = forms.CharField(max_length=10)
+    fields = MethodConsts.METHOD + '= forms.CharField(max_length=10)'    
+    code = compile(fields, '', 'exec')
+    exec(code)
