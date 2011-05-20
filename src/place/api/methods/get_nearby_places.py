@@ -17,11 +17,11 @@ def gnp(request):
         longtitude = gnp_form.cleaned_data[ParamConsts.LONGTITUDE]
 
         places = services.get_nearby_places(latitude, longtitude)
-        returnCode = errors.ERROR_SUCCESS
-        return get_json_response(get_return_dict(returnCode, __get_return_list(places)))
+        return_code = errors.ERROR_SUCCESS
+        return get_json_response(get_return_dict(return_code, __get_return_list(places)))
     else:
-        returnCode = errors.ERROR_PARAMETER
-        return get_json_response(get_return_dict(returnCode, message=gnp_form.errors))
+        return_code = errors.ERROR_PARAMETER
+        return get_json_response(get_return_dict(return_code, message=gnp_form.errors))
 
 def __get_return_list(places):
     result = []
