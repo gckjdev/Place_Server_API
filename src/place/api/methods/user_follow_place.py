@@ -4,12 +4,14 @@ Created on 2011-5-20
 @author: James
 '''
 from django import forms
+from django.views.decorators.cache import never_cache
 from orange.django.place import services
 from orange.django.place.utils import get_json_response
 from orange.place import errors
 from place.api import ParamConsts
 from place.api.utils import get_return_dict
 
+@never_cache
 def ufp(request):
     ufp_form = UfpForm(request.GET)
     if ufp_form.is_valid():

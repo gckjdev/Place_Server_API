@@ -4,6 +4,7 @@ Created on 2011-5-17
 @author: James
 '''
 from django import forms
+from django.views.decorators.cache import never_cache
 from orange.django.place import services
 from orange.django.place.models import Place
 from orange.django.place.utils import get_json_response
@@ -14,6 +15,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@never_cache
 def cpl(request):
     cpl_form = CplForm(request.GET)
     if cpl_form.is_valid():
